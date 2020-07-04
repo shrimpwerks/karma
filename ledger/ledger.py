@@ -6,18 +6,21 @@ from sqlalchemy import func
 from marshmallow import Schema, fields
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///default.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///ledger.db'
 
 db = SQLAlchemy(app)
 
 class Transaction(db.Model):
     __tablename__ = 'transactions'
-    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.Text)
     destination = db.Column(db.Text)
     amount = db.Column(db.Integer)
     currency = db.Column(db.Text)
     description = db.Column(db.Text)
+
+db.create_all()
 
 class TransactionSchema(Schema):
     id = fields.Int(dump_only=True)
@@ -70,5 +73,5 @@ def get_balance(userID: str):
     return { "balance": balance._asdict() }
 
 if __name__ == "__main__":
-    db.create_all()
-    app.run(debug=True)
+    debug = os.environ.get('DEBUG') == 'True'
+    app.run(debug=debug)
