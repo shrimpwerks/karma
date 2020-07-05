@@ -5,13 +5,13 @@ services:
     build:
       context: ledger
     ports:
-      - 80
+      - 5555:80
     volumes:
       - ./ledger:/app
   api:
     build:
       context: api
     ports:
-      - 80
+      - 6666:80
     volumes:
       - ./api:/app

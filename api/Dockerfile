@@ -1,7 +1,8 @@
 FROM python:3.8-slim
 WORKDIR /app
 
-COPY . ./
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "api:app", "--reload"]
+COPY . .
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "wsgi:app", "--reload"]
