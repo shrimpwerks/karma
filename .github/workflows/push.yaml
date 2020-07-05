@@ -1,0 +1,27 @@
+name: ci
+
+on:
+  push: {}
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Configure Docker credentials
+        run: doctl registry login
+
+      - name: Build image
+        run: docker build -t registry.digitalocean.com/haste-buff/ledger:$(echo $GITHUB_SHA | head -c7) -f ./ledger/Dockerfile ./ledger
+
+      - name: Push image
+        run: docker push registry.digitalocean.com/haste-buff/ledger
