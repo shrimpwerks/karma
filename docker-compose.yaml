@@ -8,3 +8,10 @@ services:
       - 80
     volumes:
       - ./ledger:/app
+  api:
+    build:
+      context: api
+    ports:
+      - 80
+    volumes:
+      - ./api:/app
