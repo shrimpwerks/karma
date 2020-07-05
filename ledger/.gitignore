@@ -1,1 +1,3 @@
-default.db
+/ledger.db
+/default.db
+/__pycache__
