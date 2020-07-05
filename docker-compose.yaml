@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  ledger:
+    build:
+      context: ledger
+    ports:
+      - 80
+    volumes:
+      - ./ledger:/app
