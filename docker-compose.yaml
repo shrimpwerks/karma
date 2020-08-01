@@ -8,6 +8,8 @@ services:
       - 5555:80
     volumes:
       - ./ledger:/app
+    environment:
+      - HTTP_LEDGER=ledger:80
   api:
     build:
       context: api

@@ -28,7 +28,7 @@ def give(args):
     except ValueError:
         abort(404)
 
-    requests.post("http://ledger:80/v1/transactions", json={
+    requests.post(f"http://{app.config['LEDGER_ADDR']}/v1/transactions", json={
         "source": "god",
         "destination": u_id,
         "amount": 1,
