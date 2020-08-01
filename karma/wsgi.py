@@ -5,7 +5,7 @@ temporary entry point for the slack karma api.
 import signal
 import sys
 
-from api import create_app
+from karma import create_app
 
 
 def signal_handler(sig, frame):

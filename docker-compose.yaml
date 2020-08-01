@@ -10,10 +10,10 @@ services:
       - ./ledger:/app
     environment:
       - HTTP_LEDGER=ledger:80
-  api:
+  karma:
     build:
-      context: api
+      context: karma
     ports:
       - 6666:80
     volumes:
-      - ./api:/app
+      - ./karma:/app

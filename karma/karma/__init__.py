@@ -1,6 +1,6 @@
 from flask import Flask
 
-from api.v1.root import root
+from karma.v1.root import root
 
 def create_app(test_config=None):
     '''application factory'''
