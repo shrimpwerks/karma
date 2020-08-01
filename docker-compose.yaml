@@ -5,6 +5,15 @@ services:
     build:
       context: ledger
     ports:
-      - 80
+      - 5555:80
     volumes:
       - ./ledger:/app
+  karma:
+    build:
+      context: karma
+    ports:
+      - 6666:80
+    volumes:
+      - ./karma:/app
+    environment:
+      - HTTP_LEDGER=ledger:80
