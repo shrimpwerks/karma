@@ -8,8 +8,6 @@ services:
       - 5555:80
     volumes:
       - ./ledger:/app
-    environment:
-      - HTTP_LEDGER=ledger:80
   karma:
     build:
       context: karma
@@ -17,3 +15,5 @@ services:
       - 6666:80
     volumes:
       - ./karma:/app
+    environment:
+      - HTTP_LEDGER=ledger:80
